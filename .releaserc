@@ -1,0 +1,53 @@
+{
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    "@semantic-release/npm",
+    "@semantic-release/exec"
+  ],
+  "prepare": [
+    "@semantic-release/npm",
+      {
+        "path": "@semantic-release/exec",
+        "cmd": "echo hello"
+      }
+  ],
+  "publish": [
+    "@semantic-release/npm",
+    {
+      "path": "@semantic-release/github",
+      "assets": [
+        {
+          "path": "./ts-sem-rel-circle-linux",
+          "name": "ts-sem-rel-circle-linux",
+          "label": "ts-sem-rel-circle-linux"
+        },
+        {
+          "path": "./ts-sem-rel-circle-linux.sha256",
+          "name": "ts-sem-rel-circle-linux.sha256",
+          "label": "ts-sem-rel-circle-linux.sha256"
+        },
+        {
+          "path": "./ts-sem-rel-circle-macos",
+          "name": "ts-sem-rel-circle-macos",
+          "label": "ts-sem-rel-circle-macos"
+        },
+        {
+          "path": "./ts-sem-rel-circle-macos.sha256",
+          "name": "ts-sem-rel-circle-macos.sha256",
+          "label": "ts-sem-rel-circle-macos.sha256"
+        },
+        {
+          "path": "./ts-sem-rel-circle-win.exe",
+          "name": "ts-sem-rel-circle-win.exe",
+          "label": "ts-sem-rel-circle-win.exe"
+        },
+        {
+          "path": "./ts-sem-rel-circle-win.exe.sha256",
+          "name": "ts-sem-rel-circle-win.exe.sha256",
+          "label": "ts-sem-rel-circle-win.exe.sha256"
+        }
+      ]
+    }
+  ]
+}

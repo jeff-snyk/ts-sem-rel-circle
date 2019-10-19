@@ -1,0 +1,50 @@
+{
+  "name": "ts-learn-semantic-release",
+  "version": "0.0.0-development",
+  "description": "",
+  "main": "dist/main.js",
+  "scripts": {
+    "build": "tsc",
+    "pretest": "tsc",
+    "test": "jest",
+    "prestart": "tsc",
+    "start": "node dist/main.js",
+    "eslint": "eslint --cache '{src,test,scripts,public/js/{!(build)}}/**/*.{js,ts}'",
+    "format:check": "prettier --check '{src,test,scripts,public/js/{!(build)}}/**/*.{js,ts}'",
+    "format": "prettier --write '{src,test,scripts,public/js/{!(build)}}/**/*.{js,ts}'",
+    "semantic-release": "semantic-release",
+    "pkg": "pkg ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^24.0.18",
+    "@types/node": "^12.7.1",
+    "@types/q": "^1.5.2",
+    "@typescript-eslint/eslint-plugin": "^2.0.0",
+    "@typescript-eslint/parser": "^2.0.0",
+    "eslint": "^6.2.2",
+    "eslint-config-prettier": "^6.1.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jest": "^22.15.2",
+    "jest": "^24.9.0",
+    "prettier": "^1.18.2",
+    "semantic-release": "^15.13.24",
+    "@semantic-release/exec": "^3.3.7",
+    "pkg": "^4.4.0",
+    "ts-jest": "^24.0.2",
+    "typescript": "^3.5.3"
+  },
+  "bin": "dist/main.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jeff-snyk/ts-sem-rel-circle.git"
+  },
+  "pkg": {
+    "scripts": [
+      "dist/**/*.js"
+    ],
+    "assets": []
+  }
+}

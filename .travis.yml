@@ -1,0 +1,33 @@
+sudo: false
+language: node_js
+node_js:
+  - "12"
+cache:
+  directories:
+    - node_modules
+notifications:
+  email: false
+install:
+  - npm install
+  - npm run build
+script:
+  - npm test
+jobs:
+  include:
+    - stage: test
+      script: echo "test stage"
+      name: "Test Stage"
+    - stage: Release
+      if: branch = master AND type != pull_request
+      node_js: "12"
+      script:
+      - npm run pkg
+      - ls -la
+      - shasum -a 256 ts-learn-semantic-release-linux > ts-learn-semantic-release-linux.sha256
+      - shasum -a 256 ts-learn-semantic-release-macos > ts-learn-semantic-release-macos.sha256
+      - shasum -a 256 ts-learn-semantic-release-win.exe > ts-learn-semantic-release-win.exe.sha256
+      - ls -la
+      - npx semantic-release
+branches:
+  only:
+    - "master"
