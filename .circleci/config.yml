@@ -18,6 +18,8 @@ jobs:
             npx semantic-release --dry-run
             npx semantic-release --dry-run > sem-rel-dry-run.txt
             cat sem-rel-dry-run.txt
+            dry_run_version=$(cat sem-rel-dry-run.txt | grep "The next release version is" | sed -n -e 's/^.*is //p')
+            echo "Dry run version: ${dry_run_version}"
 
   release:
     docker:
