@@ -16,6 +16,8 @@ jobs:
             npm run format:check
             npm run build
             npx semantic-release --dry-run
+            npx semantic-release --dry-run > sem-rel-dry-run.txt
+            cat sem-rel-dry-run.txt
 
   release:
     docker:
