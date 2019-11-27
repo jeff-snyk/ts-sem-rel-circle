@@ -15,13 +15,7 @@ jobs:
             npm run eslint
             npm run format:check
             npm run build
-#            npm test
             npx semantic-release --dry-run
-#            npx semantic-release --dry-run > sem-rel-dry-run.txt
-#            dry_run_version=$(cat sem-rel-dry-run.txt | grep "The next release version is" | sed -n -e 's/^.*is //p')
-#            plugin_file_version=$(cat plugin.yaml | grep version | sed -n -e 's/^\(version:\) \"\(.*\)\"/\2/p')
-#            # Fail if the "next" version from the dry-run is not equal to the version specified in the plugin.yaml
-#            test $dry_run_version = $plugin_file_version
 
   release:
     docker:
