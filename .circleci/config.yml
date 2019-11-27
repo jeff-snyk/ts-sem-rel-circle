@@ -38,7 +38,8 @@ jobs:
       - run:
           name: Semantic Release
           command: |
-            npx semantic-release
+            npx semantic-release --dry-run
+            # npx semantic-release
 
 workflows:
   version: 2
