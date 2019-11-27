@@ -27,8 +27,18 @@ jobs:
               echo "Dry run version: ${dry_run_version}"
               plugin_file_version=$(cat plugin.yaml | grep version | sed -n -e 's/^\(version:\) \"\(.*\)\"/\2/p')
               echo "Plugin file version: ${plugin_file_version}"
+
               # Fail if the "next" version from the dry-run is not equal to the version specified in the plugin.yaml
-              test $dry_run_version = $plugin_file_version
+#              test $dry_run_version = $plugin_file_version
+
+              if [[ $dry_run_version != $plugin_file_version ]]
+              then
+                echo "failing because version in plugin.yaml does not equal next version per semantic-release"
+                exit 1
+              else
+                echo "version in plugin.yaml matches next version per semantic-release (ok)"
+              fi
+
             elif grep "a new version won’t be published" sem-rel-dry-run.txt
             then
               echo "a new version won’t be published"
