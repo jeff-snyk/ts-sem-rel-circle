@@ -28,12 +28,18 @@ jobs:
             echo "not equals"
             fi
 
-#            if grep "a new version won't be published"
-#            then
-#            else
-#            fi
-#            dry_run_version=$(cat sem-rel-dry-run.txt | grep "The next release version is" | sed -n -e 's/^.*is //p')
-#            echo "Dry run version: ${dry_run_version}"
+            if grep "The next release version is"
+            dry_run_version=$(cat sem-rel-dry-run.txt | grep "The next release version is" | sed -n -e 's/^.*is //p')
+            echo "Dry run version: ${dry_run_version}"
+
+            elif grep "a new version won't be published"
+            then
+            echo "a new version won't be published"
+            else
+            echo "unknown semantic-release dry-run state - failing"
+            exit 1
+            fi
+
 
   release:
     docker:
