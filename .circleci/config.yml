@@ -16,8 +16,8 @@ jobs:
             npm run eslint
             npm run format:check
             npm run build
-            npx semantic-release --dry-run --branch ${CIRCLE_BRANCH}
-            npx semantic-release --dry-run --branch ${CIRCLE_BRANCH} > sem-rel-dry-run.txt
+            npx semantic-release --dry-run --branch ${CIRCLE_BRANCH} --no-ci
+            npx semantic-release --dry-run --branch ${CIRCLE_BRANCH} --no-ci > sem-rel-dry-run.txt
             echo
             echo "catted file:"
             cat sem-rel-dry-run.txt
