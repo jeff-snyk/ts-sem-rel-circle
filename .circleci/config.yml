@@ -84,8 +84,13 @@ workflows:
   build_and_test:
     jobs:
       - build
+      - version_check:
+          filters:
+            branches:
+              only: master
       - release:
           requires:
+            - version_check
             - build
           filters:
             branches:
