@@ -45,7 +45,11 @@ jobs:
             elif grep "a new version won’t be published" sem-rel-dry-run.txt
             then
               echo "a new version won’t be published"
+            elif grep "There are no relevant changes, so no new version is released" sem-rel-dry-run.txt
+            then
+              echo "There are no relevant changes, so no new version is released"
             else
+              # failing here this will help us detect new/changed/unanticipated log messages/scenarios from semantic-release
               echo "unknown semantic-release dry-run state - failing"
               exit 1
             fi
