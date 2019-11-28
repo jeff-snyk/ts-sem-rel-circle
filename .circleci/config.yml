@@ -27,15 +27,8 @@ jobs:
       - run:
           name: Version Check for Semantic Release
           command: |
-            ls -la
-            npm install
-            npm run eslint
-            npm run format:check
-            npm run build
-            npx semantic-release --dry-run --branch ${CIRCLE_BRANCH}
             npx semantic-release --dry-run --branch ${CIRCLE_BRANCH} > sem-rel-dry-run.txt
-            echo
-            echo "catted file:"
+            echo "semantic-release dry run output:"
             cat sem-rel-dry-run.txt
             echo "branch: ${CIRCLE_BRANCH}"
 
@@ -45,6 +38,7 @@ jobs:
               echo "Dry run version: ${dry_run_version}"
               plugin_file_version=$(cat plugin.yaml | grep version | sed -n -e 's/^\(version:\) \"\(.*\)\"/\2/p')
               echo "Plugin file version: ${plugin_file_version}"
+              echo "Will fail if ${dry_run_version} does not equal ${plugin_file_version}"
               # Fail if the "next" version from the dry-run is not equal to the version specified in the plugin.yaml
               test $dry_run_version = $plugin_file_version
             elif grep "a new version won’t be published" sem-rel-dry-run.txt
@@ -76,8 +70,7 @@ jobs:
       - run:
           name: Semantic Release
           command: |
-            npx semantic-release --dry-run
-            # npx semantic-release
+            npx semantic-release
 
 workflows:
   version: 2
