@@ -84,8 +84,8 @@ workflows:
               only: master
       - release:
           requires:
-            - build
             - version_check
+            - build
           filters:
             branches:
               only: master
