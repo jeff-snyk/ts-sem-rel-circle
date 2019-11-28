@@ -36,7 +36,7 @@ jobs:
               echo "a new version won’t be published"
             else
               echo "unknown semantic-release dry-run state - failing"
-            exit 1
+              exit 1
             fi
 
   build:
