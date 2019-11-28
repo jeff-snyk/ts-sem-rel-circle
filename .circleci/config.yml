@@ -27,7 +27,7 @@ jobs:
       - run:
           name: Version Check for Semantic Release
           command: |
-            # npm install  # required here for semantic-release install
+            npm install  # required here for semantic-release install
             npx semantic-release --dry-run --branch ${CIRCLE_BRANCH} > sem-rel-dry-run.txt
             echo "semantic-release dry run output:"
             cat sem-rel-dry-run.txt
@@ -84,8 +84,8 @@ workflows:
               only: master
       - release:
           requires:
-            - build
             - version_check
+            - build
           filters:
             branches:
               only: master
