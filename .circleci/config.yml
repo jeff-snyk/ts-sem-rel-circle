@@ -1,6 +1,7 @@
 version: 2.1
 
 jobs:
+
   build:
     docker:
       - image: circleci/node:lts
@@ -15,11 +16,28 @@ jobs:
             npm run eslint
             npm run format:check
             npm run build
-            npx semantic-release --dry-run
-            npx semantic-release --dry-run > sem-rel-dry-run.txt
+            npm test
+
+  version_check:
+    docker:
+      - image: circleci/node:lts
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run:
+          name: Version Check for Semantic Release
+          command: |
+            ls -la
+            npm install
+            npm run eslint
+            npm run format:check
+            npm run build
+            npx semantic-release --dry-run --branch ${CIRCLE_BRANCH}
+            npx semantic-release --dry-run --branch ${CIRCLE_BRANCH} > sem-rel-dry-run.txt
             echo
             echo "catted file:"
             cat sem-rel-dry-run.txt
+            echo "branch: ${CIRCLE_BRANCH}"
 
             if grep "The next release version is" sem-rel-dry-run.txt
             then
@@ -29,12 +47,12 @@ jobs:
               echo "Plugin file version: ${plugin_file_version}"
               # Fail if the "next" version from the dry-run is not equal to the version specified in the plugin.yaml
               test $dry_run_version = $plugin_file_version
-            elif grep "a new version won't be published" sem-rel-dry-run.txt
+            elif grep "a new version won’t be published" sem-rel-dry-run.txt
             then
-              echo "a new version won't be published"
+              echo "a new version won’t be published"
             else
               echo "unknown semantic-release dry-run state - failing"
-            exit 1
+              exit 1
             fi
 
   release:
