@@ -36,7 +36,7 @@ jobs:
             if grep "The next release version is" sem-rel-dry-run.txt
             then
               dry_run_version=$(cat sem-rel-dry-run.txt | grep "The next release version is" | sed -n -e 's/^.*is //p')
-              echo "Dry run version: ${dry_run_version}"
+              echo "semantic-release dry run version: ${dry_run_version}"
               plugin_file_version=$(cat plugin.yaml | grep version | sed -n -e 's/^\(version:\) \"\(.*\)\"/\2/p')
               echo "Plugin file version: ${plugin_file_version}"
               echo "Will fail if ${dry_run_version} does not equal ${plugin_file_version}"
